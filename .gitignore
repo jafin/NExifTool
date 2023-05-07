@@ -2,3 +2,5 @@ project.lock.json
 **/bin/*
 **/obj/*
 .vscode
+/NExifTool.sln.DotSettings.user
+/.idea/.idea.NExifTool/.idea/**
