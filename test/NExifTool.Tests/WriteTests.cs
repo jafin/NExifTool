@@ -131,7 +131,6 @@ namespace NExifTool.Tests
             File.Delete("file_to_file_encoded_test.jpg");
         }
 
-
         [Fact]
         public async void OverwriteTest()
         {
