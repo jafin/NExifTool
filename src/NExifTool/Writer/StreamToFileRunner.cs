@@ -25,13 +25,15 @@ namespace NExifTool.Writer
 
         public override async Task<WriteResult> RunProcessAsync(IEnumerable<Operation> updates)
         {
-            var updateArgs = GetUpdateArgs(updates);
+            GetUpdateArgs(updates);
             var runner = new StreamToStreamRunner(_options, _src);
             var result = await runner.RunProcessAsync(updates).ConfigureAwait(false);
 
-            if(result.Success)
+            if (result.Success)
             {
-                await result.Output.CopyToAsync(new FileStream(_dst, FileMode.CreateNew, FileAccess.ReadWrite)).ConfigureAwait(false);
+                using var destinationStream = new FileStream(_dst, FileMode.CreateNew, FileAccess.ReadWrite);
+                await result.Output.CopyToAsync(destinationStream)
+                    .ConfigureAwait(false);
 
                 return new WriteResult(true, null);
             }

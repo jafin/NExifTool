@@ -35,14 +35,13 @@ namespace NExifTool.Reader
         {
             var args = GetArguments(imagePath);
             var exifDataStream = await GetExifDataAsync(args, null).ConfigureAwait(false);
-
             return await GetJsonAsync(exifDataStream).ConfigureAwait(false);
         }
 
 
         async Task<JObject> GetJsonAsync(Stream exifDataStream)
         {
-            JToken token = null;
+            JToken token;
 
             using(var sr = new StreamReader(exifDataStream))
             {
@@ -65,10 +64,9 @@ namespace NExifTool.Reader
 
         async Task<Stream> GetExifDataAsync(string[] args, Stream stream)
         {
-            Command cmd = null;
-
             try
             {
+                Command cmd;
                 if(stream == null)
                 {
                     cmd = Command.Run(_opts.ExifToolPath, args);
@@ -79,12 +77,11 @@ namespace NExifTool.Reader
                 }
 
                 await cmd.Task.ConfigureAwait(false);
-
                 return cmd.StandardOutput.BaseStream;
             }
             catch (Win32Exception ex)
             {
-                throw new Exception("Error when trying to start the exiftool process.  Please make sure exiftool is installed, and its path is properly specified in the options.", ex);
+                throw new Exception("Error when trying to start the exiftool process. Please make sure exiftool is installed, and its path is properly specified in the options.", ex);
             }
         }
 

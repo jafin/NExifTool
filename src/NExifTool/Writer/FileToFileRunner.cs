@@ -57,8 +57,8 @@ namespace NExifTool.Writer
                 });
 
                 var result = await cmd.Task.ConfigureAwait(false);
-
-                return new WriteResult(result.Success, null);
+                
+                return new WriteResult(result.Success, null, result.StandardError);
             }
             catch (Win32Exception ex)
             {
