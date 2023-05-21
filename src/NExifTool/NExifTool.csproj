@@ -13,6 +13,7 @@
         <PackageProjectUrl>https://github.com/AerisG222/NExifTool</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <LangVersion>default</LangVersion>
+        <Version>0.12.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
